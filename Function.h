@@ -4,5 +4,6 @@
 
 #ifndef FUNCTION_H
 #define FUNCTION_H
+void searchBuAuthor();
 
 #endif //FUNCTION_H
