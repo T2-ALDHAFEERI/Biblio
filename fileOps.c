@@ -7,10 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char AuthorArr [50][150];
-char TitleArr [50][150];
-char TypeArr [50][150];
-int YearArr [50];
+struct Entries entries[50];
 FILE *ptr;
 void trim(char *str) {
     int i;
@@ -31,39 +28,40 @@ void ReadData(char *location) {
     if (ptr == NULL) {
         printf("Error Reading the data from file!\n");
         exit(1);
-    } else {
+    } else
+        {
         printf("Data Successfully loaded, press any key to continue!\n");
         getchar();
     }
 
     while (fgets(line, sizeof(line), ptr)) {
         if (strncmp(line, "@", 1) == 0) {
-            sscanf(line, "@%[^'{']", TypeArr[t]); // extract type
+            sscanf(line, "@%[^'{']", entries[t].TypeArr);
         } else if (strstr(line, "title") != NULL) {
             sscanf(line, "%*[^=]= {%[^}]", value);
             trim(value);
-            strncpy(TitleArr[t], value, 50);
+            strncpy(entries[t].TitleArr, value, 150);
         } else if (strstr(line, "author") != NULL) {
             sscanf(line, "%*[^=]= {%[^}]", value);
             trim(value);
-            strncpy(AuthorArr[t], value, 50);
+            strncpy(entries[t].AuthorArr, value, 150);
         } else if (strstr(line, "year") != NULL) {
             sscanf(line, "%*[^=]= {%[^}]", value);
             trim(value);
-            YearArr[t] = atoi(value);
+            entries[t].YearArr = atoi(value);
         } else if (line[0] == '}') {
-            t++; // End of entry
+            t++;
         }
     }
 
     fclose(ptr);
 
-    // print the result
+
     for (int i = 0; i < t; i++) {
         printf("---- Entry %d ----\n", i + 1);
-        printf("Type: %s\n", TypeArr[i]);
-        printf("Title: %s\n", TitleArr[i]);
-        printf("Author: %s\n", AuthorArr[i]);
-        printf("Year: %d\n", YearArr[i]);
+        printf("Type: %s\n", entries[i].TypeArr);
+        printf("Title: %s\n", entries[i].TitleArr);
+        printf("Author: %s\n", entries[i].AuthorArr);
+        printf("Year: %d\n", entries[i].YearArr);
     }
 }

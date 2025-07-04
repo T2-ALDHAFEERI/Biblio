@@ -4,6 +4,10 @@
 
 #ifndef FUNCTION_H
 #define FUNCTION_H
-void searchBuAuthor();
+
+char userEntry[150];
+
+int DisplayMenu();
+void searchByAuthor(char *authorName);
 
 #endif //FUNCTION_H
