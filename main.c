@@ -83,19 +83,43 @@ int DisplayMenu() {
 }
 
 void searchByAuthor(char *authorName) {
-
+    for ( int line = 0 ; line < 50 ; line++ ) {
+        if ( strstr (    entries[line].AuthorArr     ,  authorName   )  ) {
+            printf("Info : \n %s ,\n %s ,\n %s ,\n %d \n \n",
+                entries[line].AuthorArr,entries[line].TypeArr ,entries[line].TitleArr ,entries[line].YearArr);
+        }
+    }
 }
 void searchByTitle(char *title) {
-
+    for ( int line = 0 ; line < 50 ; line++ ) {
+        if ( strstr (    entries[line].TitleArr ,  title   )  ) {
+            printf("Info : \n %s ,\n %s ,\n %s ,\n %d \n \n",
+                entries[line].AuthorArr,entries[line].TypeArr ,entries[line].TitleArr ,entries[line].YearArr);
+        }
+    }
 }
 void searchBysingleYear(int year) {
-
-}
+    for ( int line = 0 ; line < 50 ; line++ ) {
+        if (     entries[line].YearArr == year     ) {
+            printf("Info : \n %s ,\n %s ,\n %s ,\n %d \n \n",
+       entries[line].AuthorArr,entries[line].TypeArr ,entries[line].TitleArr ,entries[line].YearArr);
+        }
+        }
+    }
 void seachByRangeOfYears(int year1 , int year2) {
+    for ( int line = 0 ; line < 50 ; line++ ) {
+        if (    entries[line].YearArr >= year1  && entries[line].YearArr <= year2  ) {
+            printf("Info : \n %s ,\n %s ,\n %s ,\n %d \n \n",
+       entries[line].AuthorArr,entries[line].TypeArr ,entries[line].TitleArr ,entries[line].YearArr);
 
+        }
+    }
 }
 void displayTypes_count() {
+    for ( int line = 0 ; line < 50 ; line++ ) {
 
+        printf("%s \n" , entries[line].TypeArr);
+    }
 }
 void showAuthors_alphabetically() {
 
