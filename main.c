@@ -6,7 +6,9 @@
 int main(void) {
     printf("Welcome to my Bibliography project!\n");
     ReadData("biblio.txt");
-
+    int result = detect_duplicate();
+    if (result==0)
+        printf("No doblication was found in your data \n");
     int userChoice = DisplayMenu();
     if (userChoice ==1) {
         printf("Please Enter Author name \n");
@@ -42,7 +44,10 @@ int main(void) {
         showAuthors_alphabetically();
     }
     else if (userChoice == 7) {
-        detect_duplicate();
+        int result = detect_duplicate();
+        if (result==0)
+            printf("No doblication was found in your data \n");
+
     }
     else if (userChoice == 8) {
         show_UWE_Harvard();
@@ -51,7 +56,12 @@ int main(void) {
         show_missing_info();
     }
     else if (userChoice == 10) {
-        add_entries();
+        struct Entries newEntry;
+        printf("Enter the new entry type \n");
+        scanf("%s",newEntry.TypeArr);
+
+
+        add_entries(newEntry);
     }
     else if (userChoice == 11) {
 
@@ -124,15 +134,63 @@ void displayTypes_count() {
 void showAuthors_alphabetically() {
 
 }
-void detect_duplicate() {
+int detect_duplicate() {
 
+    int duplication_result=0;
+    for (int line=0 ; line < occupied_entries-1 ; line ++) {
+        for (int subline = line +1 ; subline < occupied_entries ; subline++) {
+            if (strstr (entries[line].TypeArr ,  entries[subline].TypeArr )
+                && strstr (entries[line].AuthorArr ,  entries[subline].AuthorArr )
+                    && strstr (entries[line].TitleArr ,  entries[subline].TitleArr )) {
+                printf("Duplicte was found here \n");
+                printf("Info : \n %s ,\n %s ,\n %s ,\n %d \n \n",
+entries[line].AuthorArr,entries[line].TypeArr ,entries[line].TitleArr ,entries[line].YearArr);
+                duplication_result=1;
+            }
+        }
+    }
+return duplication_result;
 }
 void show_UWE_Harvard() {
 
 }
 void show_missing_info() {
 
+ for (int line = 0 ; line < occupied_entries ; line++ ) {
+     int missing_year=0;
+     int missing_type=0;
+     int missing_author=0;
+     int missing_title=0;
+     if (entries[line].YearArr == 0) {
+         missing_year=1;
+         printf("year is missing -");
+     }
+     if (strlen (entries[line].TypeArr)==0) {
+         missing_type=1;
+         printf("Type is missing -");
+     }
+     if (strlen (entries[line].TitleArr)==0) {
+         missing_title=1;
+         printf("Title is missing -");
+     }
+     if (strlen (entries[line].AuthorArr)==0) {
+         missing_author=1;
+         printf("Author is missing -");
+
+     }
+     if (missing_year == 1 || missing_author==1 || missing_title == 1 || missing_type==1) {
+        printf("Info missing at entry number %d please check to complete \n",line);
+     }
+
+ }
+
 }
-void add_entries() {
+void add_entries(struct Entries entry) {
+    FILE *ptr;
+    ptr = fopen("biblio.txt", "a");
+    if (ptr == NULL) {
+        printf("Error Opening the file!\n");
+    }
+    fprintf(ptr,"");
 
 }

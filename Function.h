@@ -15,8 +15,8 @@ void searchBysingleYear(int year);
 void seachByRangeOfYears(int year1 , int year2);
 void displayTypes_count();
 void showAuthors_alphabetically();
-void detect_duplicate();
+int detect_duplicate();
 void show_UWE_Harvard();
 void show_missing_info();
-void add_entries();
+void add_entries(struct Entries entry);
 #endif //FUNCTION_H

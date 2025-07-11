@@ -8,6 +8,7 @@
 #include <string.h>
 
 struct Entries entries[50];
+int occupied_entries;;
 FILE *ptr;
 void trim(char *str) {
     int i;
@@ -56,7 +57,7 @@ void ReadData(char *location) {
 
     fclose(ptr);
 
-
+    occupied_entries=t;
     for (int i = 0; i < t; i++) {
         printf("---- Entry %d ----\n", i + 1);
         printf("Type: %s\n", entries[i].TypeArr);

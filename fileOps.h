@@ -11,9 +11,11 @@ struct Entries {
     char TitleArr [250];
     char TypeArr [250];
     int YearArr  ;
+
 };
 
 extern struct Entries entries[50];
+extern int occupied_entries;;
 void ReadData(char *location);
 void trim(char *str);
 #endif //FILEOPS_H
