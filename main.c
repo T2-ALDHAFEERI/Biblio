@@ -59,9 +59,21 @@ int main(void) {
         struct Entries newEntry;
         printf("Enter the new entry type \n");
         scanf("%s",newEntry.TypeArr);
+        printf("Enter the new entry Author \n");
+        scanf("%s",newEntry.AuthorArr);
+        printf("Enter the new entry Title \n");
+        scanf("%s",newEntry.TitleArr);
+        printf("Enter the new entry Year \n");
+        scanf("%d",&newEntry.YearArr);
+        printf("Enter the new entry Issue \n");
+        scanf("%s",newEntry.issue);
+        printf("Enter the new entry Publisher \n");
+        scanf("%s",newEntry.publisher);
+        printf("Enter the new entry Url \n");
+        scanf("%s",newEntry.url);
 
 
-        add_entries(newEntry);
+        add_entries(&newEntry);
     }
     else if (userChoice == 11) {
 
@@ -132,7 +144,24 @@ void displayTypes_count() {
     }
 }
 void showAuthors_alphabetically() {
+    struct Entries temperoryAuthor;
 
+    for (int i = 0; i < occupied_entries - 1; i++) {
+        for (int j = i + 1; j < occupied_entries; j++) {
+            if (strcmp(entries[i].AuthorArr, entries[j].AuthorArr) > 0) {
+                // Swap entries[i] and entries[j]
+                temperoryAuthor = entries[i];
+                entries[i] = entries[j];
+                entries[j] = temperoryAuthor;
+            }
+        }
+    }
+    print_sorted_authors();
+}
+void print_sorted_authors() {
+    for ( int line = 0 ; line < 50 ; line++ ) {
+        printf("%s \n", entries[line].AuthorArr);
+    }
 }
 int detect_duplicate() {
 
@@ -152,6 +181,32 @@ entries[line].AuthorArr,entries[line].TypeArr ,entries[line].TitleArr ,entries[l
 return duplication_result;
 }
 void show_UWE_Harvard() {
+    for (int line=0 ; line < occupied_entries ; line ++)
+    {
+        printf("%d - %s \n",line , entries[line].TitleArr);
+    }
+    printf("Enter title number for harvard style \n");
+    int number;
+    scanf("%d",&number);
+
+    printf("%s. ",entries[number].AuthorArr);
+    if(entries[number].YearArr > 0 )
+        printf("(%d). ",entries[number].YearArr);
+    else
+        printf("(n.d.). ");
+
+    printf("%s. ",entries[number].TitleArr);
+
+    if(strlen(entries[number].publisher)>0)
+        printf("%s. ",entries[number].publisher);
+
+    if(strlen(entries[number].issue)>0)
+        printf("%s. ",entries[number].issue);
+
+    if(strlen(entries[number].url)>0)
+        printf("Available from : %s. \n",entries[number].url);
+
+
 
 }
 void show_missing_info() {
@@ -185,12 +240,23 @@ void show_missing_info() {
  }
 
 }
-void add_entries(struct Entries entry) {
+void add_entries(struct Entries *entryies) {
     FILE *ptr;
     ptr = fopen("biblio.txt", "a");
     if (ptr == NULL) {
         printf("Error Opening the file!\n");
     }
-    fprintf(ptr,"");
+    fprintf(ptr, "@%s{,\n", entryies->TypeArr);
+    fprintf(ptr, "   author = {%s},\n", entryies->AuthorArr);
+    fprintf(ptr, "   title = {%s},\n", entryies->TitleArr);
+    fprintf(ptr, "   year = {%d},\n", entryies->YearArr);
+    fprintf(ptr, "   issue = {%s},\n", entryies->issue);
+    fprintf(ptr, "   publisher = {%s},\n", entryies->publisher);
+    fprintf(ptr, "   url = {%s},\n", entryies->url);
+    fprintf(ptr, "}\n\n");
+
+    fclose(ptr);
+    printf("Entry added successfully.\n");
+    ReadData("biblio.txt");
 
 }

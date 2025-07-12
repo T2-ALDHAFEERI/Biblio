@@ -50,7 +50,22 @@ void ReadData(char *location) {
             sscanf(line, "%*[^=]= {%[^}]", value);
             trim(value);
             entries[t].YearArr = atoi(value);
-        } else if (line[0] == '}') {
+        }
+        else if (strstr(line, "issue") != NULL) {
+            sscanf(line, "%*[^=]= {%[^}]", value);
+            trim(value);
+            strncpy(entries[t].issue, value, 150);
+        }
+        else if (strstr(line, "publisher") != NULL) {
+            sscanf(line, "%*[^=]= {%[^}]", value);
+            trim(value);
+            strncpy(entries[t].publisher, value, 150);
+        } else if (strstr(line, "url") != NULL) {
+            sscanf(line, "%*[^=]= {%[^}]", value);
+            trim(value);
+            strncpy(entries[t].url, value, 150);
+        }
+        else if (line[0] == '}') {
             t++;
         }
     }

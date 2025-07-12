@@ -11,6 +11,9 @@ struct Entries {
     char TitleArr [250];
     char TypeArr [250];
     int YearArr  ;
+    char issue[250];
+    char publisher[250];
+    char url[250];
 
 };
 

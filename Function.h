@@ -18,5 +18,6 @@ void showAuthors_alphabetically();
 int detect_duplicate();
 void show_UWE_Harvard();
 void show_missing_info();
-void add_entries(struct Entries entry);
+void add_entries(struct Entries *entryies);
+void print_sorted_authors();
 #endif //FUNCTION_H
