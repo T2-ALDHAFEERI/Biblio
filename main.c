@@ -138,9 +138,44 @@ void seachByRangeOfYears(int year1 , int year2) {
     }
 }
 void displayTypes_count() {
-    for ( int line = 0 ; line < 50 ; line++ ) {
+    void displayTypes_count() {
+        int typesCounter[7]={0};
+        for ( int line = 0 ; line < occupied_entries ; line++ ) {
 
-        printf("%s \n" , entries[line].TypeArr);
+            if (strcmp (entries[line].TypeArr,"inproceedings")==0) {
+                typesCounter[0]++;
+            }
+            else if (strcmp (entries[line].TypeArr,"techReport")==0) {
+                typesCounter[1]++;
+            }
+            else if (strcmp (entries[line].TypeArr,"article")==0) {
+                typesCounter[2]++;
+            }
+
+            else if (strcmp (entries[line].TypeArr,"misc")==0) {
+                typesCounter[3]++;
+            }
+            else  if (strcmp (entries[line].TypeArr,"book")==0) {
+                typesCounter[4]++;
+            }
+            else if (strcmp (entries[line].TypeArr,"website")==0) {
+                typesCounter[5]++;
+            }
+            else {
+                typesCounter[6]++;
+            }
+
+        }
+
+        printf("inproceedings : %d \n",typesCounter[0]);
+        printf("techReport : %d \n",typesCounter[1]);
+        printf("article : %d \n",typesCounter[2]);
+        printf("misc : %d \n",typesCounter[3]);
+        printf("book : %d \n",typesCounter[4]);
+        printf("website : %d \n",typesCounter[5]);
+        printf("other : %d \n",typesCounter[6]);
+
+
     }
 }
 void showAuthors_alphabetically() {
